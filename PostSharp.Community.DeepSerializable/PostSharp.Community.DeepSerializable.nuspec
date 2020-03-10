@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>PostSharp.Community.DeepSerializable</id>
+    <version>1.0</version>
+    <title>PostSharp.Community.DeepSerializable</title>
+    <authors>PostSharp Technologies</authors>
+    <owners>PostSharp Technologies</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+<!--    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>-->
+<!--    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>-->
+    <description>A class annotated with [DeepSerializable] and all of its fields, recursively, are marked as serializable.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>PostSharp Technologies</copyright>
+    <tags>postsharp serializable attribute serialization binaryformatter</tags>
+    <dependencies>
+      <dependency id="PostSharp" version="6.5.2-rc" />
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="bin\Release\netstandard2.0\PostSharp.Community.DeepSerializable.dll" target="lib\netstandard2.0"/>
+    <file src="bin\Release\netstandard2.0\PostSharp.Community.DeepSerializable.xml" target="lib\netstandard2.0"/>
+    <file src="..\PostSharp.Community.DeepSerializable.Weaver\bin\Release\netstandard2.0\PostSharp.Community.DeepSerializable.Weaver.dll" target="tools"/>
+  </files>
+</package>

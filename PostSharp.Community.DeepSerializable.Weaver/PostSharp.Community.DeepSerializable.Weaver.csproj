@@ -1,0 +1,18 @@
+<Project>
+    <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <SkipPostSharp>True</SkipPostSharp>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PostSharp.Compiler.Engine" Version="6.5.2-rc" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PostSharp.Community.DeepSerializable\PostSharp.Community.DeepSerializable.csproj" />
+    </ItemGroup>
+
+    <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>
