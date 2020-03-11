@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="PostSharp.Compiler.Engine" Version="6.5.2-rc" />
+      <PackageReference Include="PostSharp.Compiler.Engine" Version="6.6.1-preview" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,10 +4,14 @@ using PostSharp.Extensibility;
 using PostSharp.Sdk.CodeModel;
 using PostSharp.Sdk.CodeModel.TypeSignatures;
 using PostSharp.Sdk.Extensibility;
+using PostSharp.Sdk.Extensibility.Configuration;
 using PostSharp.Sdk.Extensibility.Tasks;
 
 namespace PostSharp.Community.DeepSerializable.Weaver
 {
+    [ExportTask(Phase = TaskPhase.Transform, TaskName = nameof(DeepSerializableTask))]
+    [TaskDependency("AnnotationRepository", IsRequired = true, Position = DependencyPosition.Before)]
+    [TaskDependency("AspectWeaver", IsRequired = false, Position = DependencyPosition.After)]
     public class DeepSerializableTask : Task
     {
         private readonly HashSet<TypeDefDeclaration> examinedTypes = new HashSet<TypeDefDeclaration>();
