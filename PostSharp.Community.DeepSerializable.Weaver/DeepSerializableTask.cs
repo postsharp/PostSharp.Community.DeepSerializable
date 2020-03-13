@@ -23,6 +23,7 @@ namespace PostSharp.Community.DeepSerializable.Weaver
         {
             IEnumerator<IAnnotationInstance> annotations =
                 annotationService.GetAnnotationsOfType(typeof(DeepSerializableAttribute), false, true);
+
             while (annotations.MoveNext())
             {
                 IAnnotationInstance annotation = annotations.Current;
@@ -42,7 +43,7 @@ namespace PostSharp.Community.DeepSerializable.Weaver
 
             examinedTypes.Add(type);
             
-            EnsureSerializable(type);
+            MakeSerializable(type);
             
             foreach (FieldDefDeclaration field in type.Fields)
             {
@@ -54,21 +55,30 @@ namespace PostSharp.Community.DeepSerializable.Weaver
 
         private void IdentifyAndMakeSerializableRecursively(ITypeSignature type, MessageLocation location)
         {
+
             switch (type.TypeSignatureElementKind)
             {
                 case TypeSignatureElementKind.Intrinsic:
-                    // This works automatically.
+                    // This works automatically for most, but:
+                    // TODO: have an error for object, IntPtr.
                     break;
+
                 case TypeSignatureElementKind.TypeDef:
-                    // Let's hope that all the types in this assembly are typedefs. From what I remember, it's possible
-                    // that some of them are presented as typerefs which would cause them to be just verified, which
-                    // isn't ideal, but we'll see.
-                    MakeSerializableRecursively((TypeDefDeclaration) type);
+                    TypeDefDeclaration typeDef = (TypeDefDeclaration) type;
+                    if (typeDef.DeclaringAssembly == this.Project.Module.DeclaringAssembly)
+                    {
+                        MakeSerializableRecursively( typeDef );
+                    }
+                    else
+                    {
+                        VerifySerializable( typeDef, location );
+                    }
                     break;
+
                 case TypeSignatureElementKind.TypeRef:
-                    // We are unable to affect another assembly.
-                    VerifySerializable((TypeRefDeclaration) type, location);
+                    IdentifyAndMakeSerializableRecursively( type.GetTypeDefinition(), location );
                     break;
+
                 case TypeSignatureElementKind.GenericInstance:
                     GenericTypeInstanceTypeSignature
                         genericInstanceSignature = type as GenericTypeInstanceTypeSignature;
@@ -78,32 +88,30 @@ namespace PostSharp.Community.DeepSerializable.Weaver
                         IdentifyAndMakeSerializableRecursively(argument, location);
                     }
                     break;
+
                 case TypeSignatureElementKind.Array:
                     ArrayTypeSignature arraySignature = type as ArrayTypeSignature;
                     IdentifyAndMakeSerializableRecursively(arraySignature.ElementType, location);
                     break;
+
                 default:
-                    Message.Write(location, SeverityType.Warning, "DSER002",
-                        "A type signature (" + type + ") has an unrecognized kind (" + type.TypeSignatureElementKind +
-                        ").");
+                    // Other possible signature types can be ignored:
+                    //  Pointers: they cannot be serialized
+                    //  Custom modifiers: they should not be used on fields.
                     break;
             }
         }
 
-        private void VerifySerializable(TypeRefDeclaration type, MessageLocation location)
+        private void VerifySerializable( TypeDefDeclaration type, MessageLocation location)
         {
             if (!IsSerializable(type))
             {
-                // This does not work properly on .NET Core.
-                // PostSharp has difficulty understanding that some classes in .NET Core are serializable.
-                
-                // Message.Write(location, SeverityType.Warning, "DSER001",
-                //     "A type (" + type.Name +
-                //     ") is not serializable, but it's not in the same assembly so I cannot modify it.");
+                 Message.Write(location, SeverityType.Warning, "DSER001",
+                     "The type {0} is not serializable, but it's not in the same assembly so I cannot modify it.", type);
             }
         }
 
-        private void EnsureSerializable(TypeDefDeclaration type)
+        private void MakeSerializable(TypeDefDeclaration type)
         {
             if (!IsSerializable(type))
             {
@@ -111,9 +119,6 @@ namespace PostSharp.Community.DeepSerializable.Weaver
             }
         }
 
-        private static bool IsSerializable(IType type)
-        {
-            return (type.Attributes & TypeAttributes.Serializable) != 0;
-        }
+        private static bool IsSerializable( TypeDefDeclaration type ) => (type.Attributes & TypeAttributes.Serializable) != 0;
     }
 }
