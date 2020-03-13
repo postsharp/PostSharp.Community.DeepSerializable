@@ -3,7 +3,7 @@ A `[Serializable]`-like attribute that applies recursively.
 
 If you annotate a class with `[DeepSerializable]`, PostSharp marks it as `[Serializable]` and it also marks all classes that it references as `[Serializable]`, recursively. You can use this to mark the top-level class that you want to use binary serialization on as deep-serializable and you don't need to worry about any other classes.
 
-*This is an add-in for [PostSharp](https://postsharp.net). It modifies your assembly during compilation by using IL weaving.*
+*This is an add-in for [PostSharp](https://postsharp.net). It modifies your assembly during compilation by using IL weaving. The add-in functionality is in preview, and not yet public. This add-in might not work and is unsupported.*
 
 #### Example
 Your code:
