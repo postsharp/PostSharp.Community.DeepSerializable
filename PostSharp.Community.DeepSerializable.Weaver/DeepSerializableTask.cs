@@ -6,19 +6,21 @@ using PostSharp.Sdk.CodeModel.TypeSignatures;
 using PostSharp.Sdk.Extensibility;
 using PostSharp.Sdk.Extensibility.Configuration;
 using PostSharp.Sdk.Extensibility.Tasks;
+#pragma warning disable 649
 
 namespace PostSharp.Community.DeepSerializable.Weaver
 {
     [ExportTask(Phase = TaskPhase.Transform, TaskName = nameof(DeepSerializableTask))]
-    [TaskDependency("AnnotationRepository", IsRequired = true, Position = DependencyPosition.Before)]
-    [TaskDependency("AspectWeaver", IsRequired = false, Position = DependencyPosition.After)]
+    [TaskDependency(TaskNames.AspectWeaver, IsRequired = false, Position = DependencyPosition.After)]
     public class DeepSerializableTask : Task
     {
+        [ImportService] 
+        private IAnnotationRepositoryService annotationService;
+    
         private readonly HashSet<TypeDefDeclaration> examinedTypes = new HashSet<TypeDefDeclaration>();
 
         public override bool Execute()
         {
-            IAnnotationRepositoryService annotationService = this.Project.GetService<IAnnotationRepositoryService>();
             IEnumerator<IAnnotationInstance> annotations =
                 annotationService.GetAnnotationsOfType(typeof(DeepSerializableAttribute), false, true);
             while (annotations.MoveNext())
