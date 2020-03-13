@@ -5,6 +5,7 @@ If you annotate a class with `[DeepSerializable]`, PostSharp marks it as `[Seria
 
 *This is an add-in for [PostSharp](https://postsharp.net). It modifies your assembly during compilation by using IL weaving. The add-in functionality is in preview, and not yet public. This add-in might not work and is unsupported.*
 
+![CI badge](https://github.com/postsharp/PostSharp.Community.DeepSerializable/workflows/Full%20Pipeline/badge.svg)
 #### Example
 Your code:
 ```csharp
