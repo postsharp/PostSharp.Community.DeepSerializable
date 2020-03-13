@@ -1,4 +1,4 @@
-name: .NET Core
+name: Full Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,3 +19,5 @@ jobs:
         dotnet-version: 3.1.101
     - name: Build with dotnet
       run: dotnet build --configuration Release
+    - name: Run XUnit tests
+      run: dotnet test --verbosity normal 
