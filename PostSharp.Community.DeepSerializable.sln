@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Community.DeepSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Community.DeepSerializable.Tests", "PostSharp.Community.DeepSerializable.Tests\PostSharp.Community.DeepSerializable.Tests.csproj", "{F50CA89A-7A52-4934-B3FC-2FFB69813421}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Community.DeepSerializable.Tests.Dependency", "PostSharp.Community.DeepSerializable.Tests.Dependency\PostSharp.Community.DeepSerializable.Tests.Dependency.csproj", "{933DE6F8-55EC-4CA4-A85E-F1DCD0AF8FA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{F50CA89A-7A52-4934-B3FC-2FFB69813421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F50CA89A-7A52-4934-B3FC-2FFB69813421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F50CA89A-7A52-4934-B3FC-2FFB69813421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933DE6F8-55EC-4CA4-A85E-F1DCD0AF8FA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933DE6F8-55EC-4CA4-A85E-F1DCD0AF8FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933DE6F8-55EC-4CA4-A85E-F1DCD0AF8FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933DE6F8-55EC-4CA4-A85E-F1DCD0AF8FA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

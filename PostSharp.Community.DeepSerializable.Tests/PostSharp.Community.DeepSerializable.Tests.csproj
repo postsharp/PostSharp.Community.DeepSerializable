@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PostSharp.Community.DeepSerializable.Tests.Dependency\PostSharp.Community.DeepSerializable.Tests.Dependency.csproj" />
       <ProjectReference Include="..\PostSharp.Community.DeepSerializable.Weaver\PostSharp.Community.DeepSerializable.Weaver.csproj" />
       <ProjectReference Include="..\PostSharp.Community.DeepSerializable\PostSharp.Community.DeepSerializable.csproj" />
     </ItemGroup>
