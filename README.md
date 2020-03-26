@@ -49,7 +49,7 @@ public class Tile
 3. When you compile for the first time, you'll be asked to enter the license key.
 
 #### How to use
-Add the `[PostSharp.Community.DeepSerializable.DeepSerializableAttribute]` to the class that you want to use binary serialization on. You can also use [multicasting](https://doc.postsharp.net/attribute-multicasting) and inheritance.
+Add the `[PostSharp.Community.DeepSerializable.DeepSerializableAttribute]` to the class that you want to use binary serialization on. You can also use [multicasting](https://github.com/postsharp/Home/blob/master/multicasting.md) and inheritance.
 
 #### Limitations
 
