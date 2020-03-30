@@ -12,7 +12,7 @@
     <icon>icon.png</icon>
     <description>A class annotated with [DeepSerializable] and all of its fields, recursively, are marked as serializable.</description>
     <releaseNotes>Initial release.</releaseNotes>
-    <copyright>PostSharp Technologies</copyright>
+    <copyright>Copyright (c) 2020 SharpCrafters s.r.o.</copyright>
     <tags>postsharp serializable attribute serialization binaryformatter</tags>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
