@@ -10,7 +10,7 @@ using PostSharp.Sdk.Extensibility.Tasks;
 
 namespace PostSharp.Community.DeepSerializable.Weaver
 {
-    [ExportTask(Phase = TaskPhase.Transform, TaskName = nameof(DeepSerializableTask))]
+    [ExportTask(Phase = TaskPhase.CustomTransform, TaskName = nameof(DeepSerializableTask))]
     [TaskDependency(TaskNames.AspectWeaver, IsRequired = false, Position = DependencyPosition.After)]
     public class DeepSerializableTask : Task
     {
@@ -18,6 +18,8 @@ namespace PostSharp.Community.DeepSerializable.Weaver
         private IAnnotationRepositoryService annotationService;
     
         private readonly HashSet<TypeDefDeclaration> examinedTypes = new HashSet<TypeDefDeclaration>();
+
+        public override string CopyrightNotice => "PostSharp Technologies";
 
         public override bool Execute()
         {
