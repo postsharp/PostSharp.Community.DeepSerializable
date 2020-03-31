@@ -53,10 +53,11 @@ Add the `[PostSharp.Community.DeepSerializable.DeepSerializableAttribute]` to th
 
 #### Limitations
 
-* DeepSerializable works in the current project. If a deep-serializable object has a dependency to
-  a type declared in a different assembly, we will emit an error if this type is not serializable.
+* DeepSerializable works in the current project. If a deep-serializable object has a dependency on
+  a type declared in a different assembly, it will not be fully serializable.
 
-* DeepSerializable won't make derived types serializable by default.
+* Even if you make a base class deep-serializable, subclasses that inherit from that base class won't 
+be serializable unless they're also annotated with `[Serializable]` or `[DeepSerializable]`.
 
 
 #### Copyright notices

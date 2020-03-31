@@ -57,12 +57,12 @@ namespace PostSharp.Community.DeepSerializable.Weaver
 
         private void IdentifyAndMakeSerializableRecursively(ITypeSignature type, MessageLocation location)
         {
-
             switch (type.TypeSignatureElementKind)
             {
                 case TypeSignatureElementKind.Intrinsic:
                     // This works automatically for most, but:
-                    // TODO: have an error for object, IntPtr.
+                    // Consider an error for object, IntPtr, but also consider that those fields may be marked as [NonSerialized].
+                    // In the future, we might want to exclude such fields.
                     break;
 
                 case TypeSignatureElementKind.TypeDef:
@@ -108,8 +108,15 @@ namespace PostSharp.Community.DeepSerializable.Weaver
         {
             if (!IsSerializable(type))
             {
-                 Message.Write(location, SeverityType.Warning, "DSER001",
-                     "The type {0} is not serializable, but it's not in the same assembly so I cannot modify it.", type);
+                // This does not work properly on .NET Core.
+                // PostSharp has difficulty understanding that some classes in .NET Core are serializable.
+                
+                // In addition, some fields are not meant to be serialized so it's better not to emit a warning for those
+                // as well.
+                
+                // Message.Write(location, SeverityType.Warning, "DSER001",
+                //     "A type (" + type.Name +
+                //     ") is not serializable, but it's not in the same assembly so I cannot modify it.");
             }
         }
 
