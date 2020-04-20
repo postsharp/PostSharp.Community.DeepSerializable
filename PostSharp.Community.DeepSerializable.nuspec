@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>PostSharp.Community.DeepSerializable</id>
-    <version>1.2-preview</version>
+    <version>1.3</version>
     <title>PostSharp.Community.DeepSerializable</title>
     <authors>PostSharp Technologies</authors>
     <owners>PostSharp Technologies</owners>
@@ -11,12 +11,12 @@
     <projectUrl>https://github.com/postsharp/PostSharp.Community.DeepSerializable</projectUrl>
     <icon>icon.png</icon>
     <description>A class annotated with [DeepSerializable] and all of its fields, recursively, are marked as serializable.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>First full non-preview release.</releaseNotes>
     <copyright>Copyright (c) 2020 SharpCrafters s.r.o.</copyright>
     <tags>postsharp serializable attribute serialization binaryformatter</tags>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="PostSharp" version="6.6.3-preview" />
+        <dependency id="PostSharp" version="6.6.6" />
       </group>
     </dependencies>
   </metadata>
